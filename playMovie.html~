@@ -6,8 +6,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/home/raggarwal/Hackathon/movie.html">MagicMike</a>
-
+<a href="/home/raggarwal/Hackathon/movie.html"><img src="/home/raggarwal/Hackathon/MagicMike.jpg"><br>MagicMike</a>
+<br>
 <a href="/home/raggarwal/Hackathon/Movie2.html">The Hobbit</a>
 </body>
 </html>
