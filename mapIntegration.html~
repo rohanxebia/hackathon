@@ -13,7 +13,7 @@
     var locations = [
       ['Goa', 15.4253792, 73.9830029, 'Goa with its beaches, all-night parties and laid-back tropical vibe is a blissful surprise. You will love hanging around by the beach, cruising through impossibly green countryside on two wheels, and the evening ritual of watching the sun melt into the Arabian Sea.',],
       ['Agonda Beach', 15.3144691, 74.314067, 'Agonda is a great spot for sunbathing, relaxing and swimming, with still relatively few tourists. Agonda is a nice long pristine stretch of beach. Agonda is generally cheaper, quieter, hassle-free and has much less touristic feel.'],
-['Utorda Beach',15.3144691,74.314067,'The town hosts a well known beach at the southernmost tip of the Salcete beach stretch that starts from Majorda in the north to Cavelossim in the south'],
+['Utorda Beach',15.3144691,74.314067,,'The town hosts a well known beach at the southernmost tip of the Salcete beach stretch that starts from Majorda in the north to Cavelossim in the south'],
 ['Park Hyatt Goa Resort and Spa',15.3180882,73.8996066,'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.'],
 ['ABC',15.3276900,73.8989400,'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.']
     ];
