@@ -43,7 +43,33 @@ div#map_container{
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.open(map,marker);
 	});
-  
+	for (i = 0; i < touristDestinations.length; i++) { 
+    
+    var marker = new google.maps.Marker({
+      position:  new google.maps.LatLng(touristDestinations[i].lattitude, touristDestinations[i].longitude), 
+      map: map, 
+      title:touristDestinations[i].name,
+	  animation:google.maps.Animation.DROP
+    }); 
+	google.maps.event.addListener(marker,'click',function() {
+		map.setZoom(9);
+		map.setCenter(marker.getPosition());
+	});
+	google.maps.event.addListener(map,'center_changed',function() {
+		window.setTimeout(function() {
+		map.panTo(marker.getPosition());
+		},3000);
+	});
+	var infowindow = new google.maps.InfoWindow({
+		content:touristDestinations[i].about + '\n' + '<b>How to reach by Air</b>' +  touristDestinations[i].howToReachByAir + '\n<b>How to reach by bus</b>' +  touristDestinations[i].howToReachByBus + '\n<IMG BORDER="0"  SRC='+touristDestinations[i].pic+'>'
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map,marker);
+	});
+	
+	
+}
   }
 </script>
 </head>
