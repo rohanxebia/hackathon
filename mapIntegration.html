@@ -1,81 +1,95 @@
-<html>
-<head>
-<title>Google Map Hello World Example</title>
-<style type="text/css">
-div#map_container{
-	width:100%;
-	height:350px;
-}
-</style>
-<script type="text/javascript" 
-   src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-<script type="text/javascript" src="goa_destinations.js"></script>
-<script>
-  function loadMap() {
-    var latlng = new google.maps.LatLng(destination.lattitude, destination.longitude);
-    var myOptions = {
-      zoom: 4,
-      center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
-	
-    var marker = new google.maps.Marker({
-      position: latlng, 
-      map: map, 
-      title:destination.name,
-	  animation:google.maps.Animation.DROP
-    }); 
-	google.maps.event.addListener(marker,'click',function() {
-		map.setZoom(9);
-		map.setCenter(marker.getPosition());
-	});
-	google.maps.event.addListener(map,'center_changed',function() {
-		window.setTimeout(function() {
-		map.panTo(marker.getPosition());
-		},3000);
-	});
-	var infowindow = new google.maps.InfoWindow({
-		content:destination.about + '<IMG BORDER="0"  SRC='+destination.pic+'>'
-	});
-
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.open(map,marker);
-	});
-	for (i = 0; i < touristDestinations.length; i++) { 
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <title>Google Maps Multiple Markers</title> 
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+</head> 
+<body>
+  <div id="map" style="width: 500px; height: 400px;"></div>
+  
+  <script>
+    // Define your locations: HTML content for the info window, latitude, longitude
+    var locations = [
+      ['Goa', 15.4253792, 73.9830029, 'Goa with its beaches, all-night parties and laid-back tropical vibe is a blissful surprise. You will love hanging around by the beach, cruising through impossibly green countryside on two wheels, and the evening ritual of watching the sun melt into the Arabian Sea.',],
+      ['Agonda Beach', 15.0437626, 73.9857577, 'Agonda is a great spot for sunbathing, relaxing and swimming, with still relatively few tourists. Agonda is a nice long pristine stretch of beach. Agonda is generally cheaper, quieter, hassle-free and has much less touristic feel.']
+    ];
     
-    var marker = new google.maps.Marker({
-      position:  new google.maps.LatLng(touristDestinations[i].lattitude, touristDestinations[i].longitude), 
-      map: map, 
-      title:touristDestinations[i].name,
-	  animation:google.maps.Animation.DROP
-    }); 
-	google.maps.event.addListener(marker,'click',function() {
+    // Setup the different icons and shadows
+    var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+    
+    var icons = [
+      iconURLPrefix + 'red-dot.png',
+      iconURLPrefix + 'green-dot.png',
+      iconURLPrefix + 'blue-dot.png',
+      iconURLPrefix + 'orange-dot.png',
+      iconURLPrefix + 'purple-dot.png',
+      iconURLPrefix + 'pink-dot.png',      
+      iconURLPrefix + 'yellow-dot.png'
+    ]
+    var iconsLength = icons.length;
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(15.4253792, 73.9830029),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      streetViewControl: false,
+      panControl: false,
+      zoomControlOptions: {
+         position: google.maps.ControlPosition.LEFT_BOTTOM
+      }
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 160
+    });
+
+    var markers = new Array();
+    
+    var iconCounter = 0;
+    
+    // Add the markers and infowindows to the map
+    for (var i = 0; i < locations.length; i++) {  
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: icons[iconCounter],
+		title:locations[i][0]
+      });
+
+      markers.push(marker);
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][3]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+      
+	  google.maps.event.addListener(marker,'click',function() {
 		map.setZoom(9);
 		map.setCenter(marker.getPosition());
 	});
-	google.maps.event.addListener(map,'center_changed',function() {
-		window.setTimeout(function() {
-		map.panTo(marker.getPosition());
-		},3000);
-	});
-	var infowindow = new google.maps.InfoWindow({
-		content:touristDestinations[i].about + '\n' + '<b>How to reach by Air</b>' +  touristDestinations[i].howToReachByAir + '\n<b>How to reach by bus</b>' +  touristDestinations[i].howToReachByBus + '\n<IMG BORDER="0"  SRC='+touristDestinations[i].pic+'>'
-	});
+		
+      iconCounter++;
+      // We only have a limited number of possible icon colors, so we may have to restart the counter
+      if(iconCounter >= iconsLength) {
+      	iconCounter = 0;
+      }
+    }
 
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.open(map,marker);
-	});
-	
-	
-}
-  }
-</script>
-</head>
-
-<body onload="loadMap()">
-<div id="map_container"></div>
+    function autoCenter() {
+      //  Create a new viewpoint bound
+      var bounds = new google.maps.LatLngBounds();
+      //  Go through each...
+      for (var i = 0; i < markers.length; i++) {  
+				bounds.extend(markers[i].position);
+      }
+      //  Fit these bounds to the map
+      map.fitBounds(bounds);
+    }
+    autoCenter();
+  </script> 
 </body>
-
 </html>
