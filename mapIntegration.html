@@ -10,9 +10,10 @@ div#map_container{
 <script type="text/javascript" 
    src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-<script type="text/javascript">
+<script type="text/javascript" src="goa_destinations.js"></script>
+<script>
   function loadMap() {
-    var latlng = new google.maps.LatLng(4.3695030, 101.1224120);
+    var latlng = new google.maps.LatLng(destination.lattitude, destination.longitude);
     var myOptions = {
       zoom: 4,
       center: latlng,
@@ -23,8 +24,25 @@ div#map_container{
     var marker = new google.maps.Marker({
       position: latlng, 
       map: map, 
-      title:"my hometown, Malim Nawar!"
+      title:destination.name,
+	  animation:google.maps.Animation.DROP
     }); 
+	google.maps.event.addListener(marker,'click',function() {
+		map.setZoom(9);
+		map.setCenter(marker.getPosition());
+	});
+	google.maps.event.addListener(map,'center_changed',function() {
+		window.setTimeout(function() {
+		map.panTo(marker.getPosition());
+		},3000);
+	});
+	var infowindow = new google.maps.InfoWindow({
+		content:destination.about + '<IMG BORDER="0"  SRC='+destination.pic+'>'
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map,marker);
+	});
   
   }
 </script>
