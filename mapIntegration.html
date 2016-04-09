@@ -1,98 +1,100 @@
 <!DOCTYPE html>
-<html> 
-<head> 
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-  <title>Google Maps Multiple Markers</title> 
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-</head> 
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Google Maps Multiple Markers</title>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+</head>
+
 <body>
-  <div id="map" style="width: 500px; height: 400px;"></div>
-  
-  <script>
+    <div id="map" style="width: 500px; height: 400px;"></div>
+    <script>
     // Define your locations: HTML content for the info window, latitude, longitude
     var locations = [
-      ['Goa', 15.4253792, 73.9830029, 'Goa with its beaches, all-night parties and laid-back tropical vibe is a blissful surprise. You will love hanging around by the beach, cruising through impossibly green countryside on two wheels, and the evening ritual of watching the sun melt into the Arabian Sea.',],
-      ['Agonda Beach', 15.3144691, 74.314067, 'Agonda is a great spot for sunbathing, relaxing and swimming, with still relatively few tourists. Agonda is a nice long pristine stretch of beach. Agonda is generally cheaper, quieter, hassle-free and has much less touristic feel.'],
-['Utorda Beach',15.3144691,74.314067,'The town hosts a well known beach at the southernmost tip of the Salcete beach stretch that starts from Majorda in the north to Cavelossim in the south'],
-['Park Hyatt Goa Resort and Spa',15.3180882,73.8996066,'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.'],
-['ABC',15.3276900,73.8989400,'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.']
+        ['Goa', 15.4253792, 73.9830029, 'Goa with its beaches, all-night parties and laid-back tropical vibe is a blissful surprise. You will love hanging around by the beach, cruising through impossibly green countryside on two wheels, and the evening ritual of watching the sun melt into the Arabian Sea.', ],
+        ['Agonda Beach', 15.3144691, 74.314067, 'Agonda is a great spot for sunbathing, relaxing and swimming, with still relatively few tourists. Agonda is a nice long pristine stretch of beach. Agonda is generally cheaper, quieter, hassle-free and has much less touristic feel.'],
+        ['Utorda Beach', 15.3144691, 74.314067, 'The town hosts a well known beach at the southernmost tip of the Salcete beach stretch that starts from Majorda in the north to Cavelossim in the south'],
+        ['Park Hyatt Goa Resort and Spa', 15.3180882, 73.8996066, 'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.'],
+        ['ABC', 15.3276900, 73.8989400, 'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.']
     ];
-    
+
     // Setup the different icons and shadows
     var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
-    
+
     var icons = [
-      iconURLPrefix + 'red-dot.png',
-      iconURLPrefix + 'red-dot.png',
-      iconURLPrefix + 'red-dot.png',
-      iconURLPrefix + 'yellow-dot.png',
-      iconURLPrefix + 'red-dot.png',
-      iconURLPrefix + 'pink-dot.png',      
-      iconURLPrefix + 'yellow-dot.png'
+        iconURLPrefix + 'red-dot.png',
+        iconURLPrefix + 'red-dot.png',
+        iconURLPrefix + 'red-dot.png',
+        iconURLPrefix + 'yellow-dot.png',
+        iconURLPrefix + 'red-dot.png',
+        iconURLPrefix + 'pink-dot.png',
+        iconURLPrefix + 'yellow-dot.png'
     ]
     var iconsLength = icons.length;
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: new google.maps.LatLng(15.4253792, 73.9830029),
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      mapTypeControl: false,
-      streetViewControl: false,
-      panControl: false,
-      zoomControlOptions: {
-         position: google.maps.ControlPosition.LEFT_BOTTOM
-      }
+        zoom: 10,
+        center: new google.maps.LatLng(15.4253792, 73.9830029),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        panControl: false,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+        }
     });
 
     var infowindow = new google.maps.InfoWindow({
-      maxWidth: 160
+        maxWidth: 160
     });
 
     var markers = new Array();
-    
+
     var iconCounter = 0;
-    
+
     // Add the markers and infowindows to the map
-    for (var i = 0; i < locations.length; i++) {  
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map,
-        icon: icons[iconCounter],
-		title:locations[i][0]
-      });
+    for (var i = 0; i < locations.length; i++) {
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map,
+            icon: icons[iconCounter],
+            title: locations[i][0]
+        });
 
-      markers.push(marker);
+        markers.push(marker);
 
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][3]);
-          infowindow.open(map, marker);
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][3]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+
+        google.maps.event.addListener(marker, 'click', function() {
+            map.setZoom(9);
+            map.setCenter(marker.getPosition());
+        });
+
+        iconCounter++;
+        // We only have a limited number of possible icon colors, so we may have to restart the counter
+        if (iconCounter >= iconsLength) {
+            iconCounter = 0;
         }
-      })(marker, i));
-      
-	  google.maps.event.addListener(marker,'click',function() {
-		map.setZoom(9);
-		map.setCenter(marker.getPosition());
-	});
-		
-      iconCounter++;
-      // We only have a limited number of possible icon colors, so we may have to restart the counter
-      if(iconCounter >= iconsLength) {
-      	iconCounter = 0;
-      }
     }
 
     function autoCenter() {
-      //  Create a new viewpoint bound
-      var bounds = new google.maps.LatLngBounds();
-      //  Go through each...
-      for (var i = 0; i < markers.length; i++) {  
-				bounds.extend(markers[i].position);
-      }
-      //  Fit these bounds to the map
-      map.fitBounds(bounds);
+        //  Create a new viewpoint bound
+        var bounds = new google.maps.LatLngBounds();
+        //  Go through each...
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].position);
+        }
+        //  Fit these bounds to the map
+        map.fitBounds(bounds);
     }
     autoCenter();
-  </script> 
+    </script>
 </body>
+
 </html>
