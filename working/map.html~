@@ -78,7 +78,7 @@ var locations = [
     ['Park Hyatt Goa Resort and Spa', 15.3180482, 73.8995066, 'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.'],
     ['The Taj', 15.5565803, 73.8156884, 'Overlooking the Arabian Sea and a 4-minute walk from Arossim Beach, this posh luxury resort complex, on 45 acres with gardens and lagoons, is 10 km from Fatorda Stadium and 14 km from Goa International Airport.'],
     ['Goa Marriott Resort & Spa', 15.5365612, 73.8165617, 'Taj Exotica Resort & Spa, Goa built on the crescent of the beach at Benaulim, in Goa, India. The hotel is the part of the chain hotels of Taj Group of Hotels'],
-    ['Ginger Hotel', 15.5266900, 73.9969400, 'Ginger Hotel, Goa built on the crescent of the beach at Benaulim, in Goa, India. The hotel is the part of the chain hotels of Taj Group of Hotels'],
+    ['Ginger Hotel', 15.5266900, 73.9969400, 'Taj Exotica Resort & Spa, Goa built on the crescent of the beach at Benaulim, in Goa, India. The hotel is the part of the chain hotels of Taj Group of Hotels'],
 ['Goa Airport',15.3803485,73.8349952,'Goa Airport']
 ];
 
